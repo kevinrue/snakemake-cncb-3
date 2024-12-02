@@ -2,3 +2,17 @@
 # Please follow the best practices: 
 # https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html,
 # in particular regarding the standardized folder structure mentioned there. 
+
+container: "docker://condaforge/miniforge3:24.9.2-0"
+
+configfile: "config/config.yaml"
+
+##### load rules #####
+
+include: "rules/resources.smk"
+
+##### main rule #####
+rule all:
+    input:
+        "resources/genome/genome.gtf.gz",
+        "resources/genome/genome.fa.gz",

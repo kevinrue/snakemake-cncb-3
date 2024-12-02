@@ -19,3 +19,28 @@ If you use this workflow in a paper, don't forget to give credits to the authors
 * Replace `<name>` with the workflow name (can be the same as `<repo>`).
 * Replace `<description>` with a description of what the workflow does.
 * The workflow will occur in the snakemake-workflow-catalog once it has been made public. Then the link under "Usage" will point to the usage instructions if `<owner>` and `<repo>` were correctly set.
+
+## Developer's corner
+
+```
+# Working directory
+cd $(realpath .) # containers prefer real paths
+
+# Cleanup
+rm nohup.out
+rm -r sps-*
+
+# Host directories that need mounting to container
+#TMP_APPTAINER_ARGS="--bind /var/scratch"
+TMP_APPTAINER_ARGS=" --bind /ceph/project/cncb/shared"
+TMP_APPTAINER_ARGS+=" --bind /ceph/project/cncb/albrecht"
+
+# Execution
+nohup snakemake \
+  --sdm conda apptainer \
+  --apptainer-args "$TMP_APPTAINER_ARGS" &
+
+tail -f nohup.out
+
+watch -n 10 squeue --me
+```

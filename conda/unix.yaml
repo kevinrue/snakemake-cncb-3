@@ -1,0 +1,17 @@
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - curl
+  - alevin-fry
+  - bwa
+  - conda
+  - fastqc
+  - gatk4
+  - kb-python
+  - mamba
+  - multiqc
+  - picard
+  - piscem
+  - samtools
+  - simpleaf
